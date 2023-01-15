@@ -1,10 +1,9 @@
 import { Stack } from '@mui/system';
 import { ICategory } from '../../utils/type';
 import { categories } from '../../utils/constants';
+import { ISidebarProps } from './type';
 
-const selectedCategory = 'New';
-
-const Sidebar = () => (
+const Sidebar = ({ selectedCategory, setSelectedCategory }: ISidebarProps) => (
     <Stack
         direction='row'
         sx={{
@@ -17,6 +16,7 @@ const Sidebar = () => (
             return <button
                 key={name}
                 className='category-btn'
+                onClick={() => setSelectedCategory(name)}
                 style={{
                     background: name === selectedCategory ? '#FC1503' : '',
                     color: 'white'
