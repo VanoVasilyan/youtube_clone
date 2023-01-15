@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Box, Stack, Typography } from '@mui/material';
+import { fetchFromAPI } from '../../utils/fetchFromApi';
 import Sidebar from '../Sidebar/Sidebar';
+import Videos from '../Videos/Videos';
 
 const Feed = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>('New');
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
+  }, [selectedCategory])
 
   return (
     <Stack
@@ -19,6 +26,7 @@ const Feed = () => {
         <Typography variant='h4' fontWeight='bold' mb={2} sx={{ color: 'white' }}>
           New <span style={{ color: '#F31503' }}>videos</span>
         </Typography>
+        <Videos videos={[{ id: 1 }]} />
       </Box>
     </Stack>
   )
